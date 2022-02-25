@@ -2,10 +2,9 @@ import types
 from typing import Union
 
 import pyrebase
+from creds import FIREBASE
 
-config = None # TODO: Parse firebase.json (creds)
-
-firebase = pyrebase.initialize_app(config).database() # Create firebase object
+firebase = pyrebase.initialize_app(FIREBASE).database() # Create firebase object
 db = firebase.database() # Create database object
 
 def create_user(userid: int, name: str) -> types.Users:
