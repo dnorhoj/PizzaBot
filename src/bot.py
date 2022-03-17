@@ -185,7 +185,7 @@ async def register(
     except peewee.PeeweeException:
         return await interaction.send("You are already registered.", ephemeral=True)
 
-    await interaction.send(f"Done [Show profile]", ephemeral=True)
+    await interaction.send(f"Done", ephemeral=True)
 
 
 @bot.slash_command(
