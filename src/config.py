@@ -46,6 +46,7 @@ ADMINS = [
 
 INFO = """Order with `/order`
 View your basket with `/basket`
-See your basket with `WIP`
-Close the order with `/order`
+Clear your basket with `/clearbasket`
+Close the order with `/close`
+See who ordered what with `/payment`
 """
