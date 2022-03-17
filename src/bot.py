@@ -6,7 +6,7 @@ from random import choice
 from string import ascii_lowercase
 
 import peewee
-from nextcord import Color, Embed, Interaction, SlashOption
+from nextcord import errors, Color, Embed, Interaction, SlashOption
 from nextcord.ext import commands
 
 import models
@@ -50,7 +50,10 @@ async def render_embed(order: models.Order, interaction: Interaction, closed=Fal
     embed.add_field(
         name="Info", value=f"Started by <@{order.created_by.discord_id}>\n"+INFO)
 
-    orig_message = await interaction.channel.fetch_message(order.order_message)
+    try:
+        orig_message = await interaction.channel.fetch_message(order.order_message)
+    except errors.NotFound:
+        pass
 
     await orig_message.edit(embed=embed)
 
