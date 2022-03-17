@@ -12,6 +12,9 @@ from nextcord.ext import commands
 import models
 from config import ADMINS, GUILD_IDS, INFO, VOICE_LINES, PING_ID
 from ui import BestilView
+from models import create_tables
+
+create_tables()
 
 bot = commands.Bot(command_prefix=''.join(
     [choice(ascii_lowercase) for _ in range(32)]))
@@ -128,8 +131,8 @@ async def order(
 
     res = ""
     if custom is not None:
-        if len(custom) > 32:
-            return await interaction.send("Item name can only be 32 characters long...", ephemeral=True)
+        if len(custom) > 100:
+            return await interaction.send("Item name can only be 100 characters long...", ephemeral=True)
         custom = custom.capitalize()
         embed = Embed(
             title="La Sosta farvel",
@@ -301,7 +304,7 @@ async def payments(
         inline=True
     )
 
-    embed.set_footer("Started at:")
+    embed.set_footer(text="Started at:")
     embed.timestamp = order.created
 
     await interaction.send(embed=embed, ephemeral=True)
