@@ -38,7 +38,7 @@ class BestilView(ui.View):
 
     async def end(self, interaction: Interaction, value: str = None):
         self.value = value
-        
+
         embed = Embed(
             title="La Sosta farvel",
             description=f"+{value}",
