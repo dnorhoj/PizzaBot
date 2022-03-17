@@ -52,11 +52,10 @@ async def render_embed(order: models.Order, interaction: Interaction, closed=Fal
 
     try:
         orig_message = await interaction.channel.fetch_message(order.order_message)
+        await orig_message.edit(embed=embed)
+        
     except errors.NotFound:
         pass
-
-    await orig_message.edit(embed=embed)
-
 
 @bot.slash_command(
     guild_ids=GUILD_IDS,
