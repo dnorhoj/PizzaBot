@@ -12,9 +12,8 @@ from nextcord.ext import commands
 import models
 from config import ADMINS, GUILD_IDS, INFO, VOICE_LINES, PING_ID
 from ui import BestilView
-from models import create_tables
 
-create_tables()
+models.create_tables()
 
 bot = commands.Bot(command_prefix=''.join(
     [choice(ascii_lowercase) for _ in range(32)]))
@@ -53,7 +52,7 @@ async def render_embed(order: models.Order, interaction: Interaction, closed=Fal
     try:
         orig_message = await interaction.channel.fetch_message(order.order_message)
         await orig_message.edit(embed=embed)
-        
+
     except errors.NotFound:
         pass
 

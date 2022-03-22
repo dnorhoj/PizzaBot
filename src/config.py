@@ -20,9 +20,9 @@ MENU = [
                 "price": 57
             },
             {
-                "name": "Fiskefilet",
-                "style": ButtonStyle.blurple,
-                "price": 57
+                "name": "Durum Shawarma",
+                "style": ButtonStyle.green,
+                "price": 58
             }
         ]
     }
