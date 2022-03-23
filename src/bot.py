@@ -6,11 +6,11 @@ from random import choice
 from string import ascii_lowercase
 
 import peewee
-from nextcord import errors, Color, Embed, Interaction, SlashOption
+from nextcord import Color, Embed, Interaction, SlashOption, errors
 from nextcord.ext import commands
 
 import models
-from config import ADMINS, GUILD_IDS, INFO, VOICE_LINES, PING_ID
+from config import ADMINS, GUILD_IDS, INFO, PING_ID, VOICE_LINES
 from ui import BestilView
 
 models.create_tables()
@@ -55,6 +55,7 @@ async def render_embed(order: models.Order, interaction: Interaction, closed=Fal
 
     except errors.NotFound:
         pass
+
 
 @bot.slash_command(
     guild_ids=GUILD_IDS,
@@ -287,15 +288,15 @@ async def payments(
     embed = Embed(title=f"Order #{order.id}",
                   description="Payment information",
                   color=Color.green())
-    
+
     ordertext = []
     for userid in baskets:
         ordertext.append(f"**{baskets[userid][0]}**")
         for item in baskets[userid][1:]:
             ordertext[-1] += f"\n`{item}`"
-    
+
     ordertext = "\n\n".join(ordertext)
-    
+
     if len(ordertext) == 0:
         ordertext = "Empty order"
 

@@ -1,5 +1,6 @@
-import peewee
 from os import environ
+
+import peewee
 
 #db = peewee.SqliteDatabase('pizza.db')
 db = peewee.PostgresqlDatabase(environ['POSTGRES_DB'], user=environ['POSTGRES_USER'], password=environ['POSTGRES_PASSWORD'],
