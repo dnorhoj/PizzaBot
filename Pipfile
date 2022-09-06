@@ -7,7 +7,7 @@ name = "pypi"
 nextcord = "*"
 pyrebase4 = "*"
 peewee = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 autopep8 = "*"
