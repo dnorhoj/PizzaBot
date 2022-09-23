@@ -163,6 +163,67 @@ async def order(
             await interaction.send("Unknown error!", ephemeral=True)
             raise
 
+            
+@bot.slash_command(
+    guild_ids=GUILD_IDS,
+    description="Order as others with this command."
+)
+async def order_as (
+    interaction: Interaction,
+    name: str = SlashOption(
+        name="name",
+        required=True
+    ),
+    custom: str = SlashOption(
+        name="custom",
+        required=False
+    )
+):
+    try:
+        user = models.User.get(models.User.discord_id == interaction.user.id)
+    except models.User.DoesNotExist:
+        return await interaction.send("Please set your name with `/register`!", ephemeral=True)
+
+    try:
+        order = models.Order.get(models.Order.open == True)
+    except:
+        return await interaction.send("No order has been started... Start one with `/start`", ephemeral=True)
+
+    res = ""
+    if custom is not None:
+        if len(custom) > 100:
+            return await interaction.send("Item name can only be 100 characters long...", ephemeral=True)
+        if len(name) > 30:
+            return await interaction.send("Name can only be 30 characters long...", ephemeral=True)
+        custom = custom.capitalize()
+        embed = Embed(
+            title="La Sosta farvel",
+            description=f"+{custom}",
+            color=Color.red()
+        )
+
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+        res = custom
+    else:
+        bestilview = BestilView()
+        await interaction.response.send_message(
+            choice(VOICE_LINES),
+            ephemeral=True,
+            view=bestilview
+        )
+
+        await bestilview.wait()
+        res = bestilview.value
+
+    if res is not None:
+        try:
+            res = f"{res} - {name}"
+            models.BasketItem.create(added_by=user, item=res, order=order)
+            await render_embed(order, interaction)
+        except:
+            await interaction.send("Unknown error!", ephemeral=True)
+            raise
+            
 
 @bot.slash_command(
     guild_ids=GUILD_IDS,
