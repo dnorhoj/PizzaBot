@@ -7,22 +7,22 @@ MENU = [
             {
                 "name": "Salatpizza",
                 "style": ButtonStyle.green,
-                "price": 53
+                "price": 56
             },
             {
                 "name": "Pep",
                 "style": ButtonStyle.green,
-                "price": 53
+                "price": 56
             },
             {
                 "name": "Pep m. dres",
                 "style": ButtonStyle.green,
-                "price": 60
+                "price": 63
             },
             {
                 "name": "Durum Shawarma",
                 "style": ButtonStyle.green,
-                "price": 60
+                "price": 62
             }
         ]
     }
